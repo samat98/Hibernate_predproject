@@ -34,7 +34,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Query query = session.createSQLQuery(sql);
         query.executeUpdate();
         session.getTransaction().commit();
-
+        session.close();
     }
 
     @Override
@@ -46,6 +46,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Query query = session.createSQLQuery(sql);
         query.executeUpdate();
         session.getTransaction().commit();
+        session.close();
     }
 
     @Override
@@ -58,6 +59,7 @@ public class UserDaoHibernateImpl implements UserDao {
         session.beginTransaction();
         session.save(user);
         session.getTransaction().commit();
+        session.close();
     }
 
     @Override
@@ -68,6 +70,7 @@ public class UserDaoHibernateImpl implements UserDao {
         query.setLong("id", id);
         query.executeUpdate();
         session.getTransaction().commit();
+        session.close();
     }
 
     @Override
@@ -75,6 +78,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Session session = Util.getSessionFactory().openSession();
         Query<User> query  = session.createQuery("select e from User e");
         List<User> list = query.list();
+        session.close();
         return list;
     }
 
@@ -85,5 +89,6 @@ public class UserDaoHibernateImpl implements UserDao {
         Query query = session.createQuery("delete from User");
         query.executeUpdate();
         session.getTransaction().commit();
+        session.close();
     }
 }
